@@ -1,11 +1,13 @@
 class App extends React.Component{
 
   constructor(){
+    // khởi tạo
     super();
     this.state = { data:[] }
   }
 
   componentDidMount() {
+    //đọc data từ file json
     let config_file="data/config.json";
     this.serverRequest = $.get(config_file, function (_data) {
       this.setState({
@@ -15,44 +17,57 @@ class App extends React.Component{
   }
 
   render(){
+    // render to html
     return (
       <div>
         <Header {...this.state.data.Header} />
         <Slider {...this.state.data.Slider} />
-        <Project {...this.state} />
-        <Footer {...this.state} />
+        <Project {...this.state.data.Project} />
+        <Footer {...this.state.data.Footer} />
       </div>
     )
   }
 
   componentWillUnmount() {
+    // abort serverRequest before a component is unmounted from the DOM.
     this.serverRequest.abort();
   }
 
   componentDidUpdate() {
+    // after the component's updates are flushed to the DOM
+    // set interval to slider
+    $("#homeSlider").carousel({interval: 3000});
+    // set interval to slider project
+    $("#projectSlider").carousel({interval: 5000});
+    // call event when click next, pre button on projectSlider
     $('.multi-item-carousel .item').each(function(){
       var next = $(this).next();
-      if (!next.length) {  next = $(this).siblings(':first')}
-      next.children(':first-child').clone().appendTo($(this))
-      if (next.next().length>0) {
-         next.next().children(':first-child').clone().appendTo($(this))
+      if (!next.length){
+          next = $(this).siblings(':first')
       }
-      else {
+      next.children(':first-child').clone().appendTo($(this))
+      if (next.next().length>0){
+       next.next().children(':first-child').clone().appendTo($(this))
+      }
+      else{
         $(this).siblings(':first').children(':first-child').clone().appendTo($(this))
       }
     })
   }
+
 }
 
-// start function sortByNum
+/*-------------------------------------------Start function sortByNum------------------------------------------*/
+// nhận vào 1 obj và trả về obj đã được sắp xếp theo trường num
 const Sort = (obj) =>{
 	var _obj=[];
 	Object.keys(obj).map( (index) =>{ _obj.push(obj[index]) });
 	return _obj.sort( (a,b) => { return (a.num > b.num) ? 1 : ((b.num > a.num) ? -1 : 0) } )
 }
-// end function sortByNum
+/*-------------------------------------------End function sortByNum---------------------------------------------*/
 
-// start header
+/*-------------------------------------------Start Header-------------------------------------------------------*/
+// Header bao gồm Logo, Menu
 const Header =(props) => {
     if(props.Menu){
       var _menus=Sort(props.Menu);
@@ -75,11 +90,11 @@ const Header =(props) => {
                     <li className="menu"><a href="#">My Portal</a></li>
                     <li className="dropdown menu">
                       <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span className="glyphicon glyphicon-menu-hamburger lager"></span></a>
-                        <ul className="dropdown-menu">
-                          {_menus.map((val,index) => {
-                              return <Menu link={val.link} text={val.text} key={index} />
-                          })}
-                        </ul>
+                      <ul className="dropdown-menu">
+                        {_menus.map((val,index) => {
+                          return <Menu link={val.link} text={val.text} key={index} />
+                        })}
+                      </ul>
                     </li>
                   </ul>
                 </div>
@@ -102,23 +117,23 @@ const Menu = (props) => {
    <li><a href={props.link}>{props.text}</a></li>
  )
 }
-// end header
+/*-------------------------------------------End Header-------------------------------------------------------*/
 
-// start Slider
+/*-------------------------------------------Start Slider------------------------------------------------------*/
 const Slider = (props) => {
     if(props.hasOwnProperty(0)){
       var _sliders=Sort(props);
       return(
         <section id="slider">
-            <div id="home-carousel" className="carousel slide" data-ride="carousel" data-interval="100">
-              <div className="carousel-inner">
-                {_sliders.map((val,index) => {
-                    return <SliderItem key={index} image={val.image} index={index} text={val.text}/>
-                })}
-              </div>
+          <div id="homeSlider" className="carousel slide" data-ride="carousel">
+            <div className="carousel-inner">
+              {_sliders.map((val,index) => {
+                  return <SliderItem key={index} image={val.image} index={index} text={val.text}/>
+              })}
             </div>
+          </div>
         </section>
-        )
+      )
     }
     else {
       return null;
@@ -137,18 +152,18 @@ const SliderItem = (props) => {
     </div>
   )
 }
-// end Slider
+/*-------------------------------------------End Slider------------------------------------------------------*/
 
-// start project
+/*-------------------------------------------Start Project------------------------------------------------------*/
 const Project = (props) => {
-  if(props.data.Project !=undefined){
-    var _projects=Sort(props.data.Project);
+  if(props.hasOwnProperty(0)){
+    var _projects=Sort(props);
     return(
       <section id="project">
-        <div className="carousel slide multi-item-carousel" id="theCarousel" data-interval="100" >
+        <div className="carousel slide multi-item-carousel" id="projectSlider" data-interval="3000" >
           <div className="container">
             <div className="section-header">
-   	          <h2 className="section-title text-center">COMPANY PROJECTS</h2>
+   	          <h2 className="section-title text-center">Company Projects</h2>
    	        </div>
             <div className="row">
               <div className="col-xs-12">
@@ -174,7 +189,7 @@ const ProjectItem = (props) => {
       <div className="col-xs-4">
         <div className="boder">
           <div className="project-img">
-            <img src={props.image} className="img-responsive fix_img"/>
+            <img src={props.image} className="img-responsive fix_img" />
             <span className="tooltiptext" dangerouslySetInnerHTML={{__html: props.description}} />
           </div>
           <div className="project-info">
@@ -193,31 +208,31 @@ const BtnControls = () => {
     </div>
   )
 }
-// end project
+/*-------------------------------------------End Project------------------------------------------------------*/
 
-// start footer
+/*-------------------------------------------Start Footer------------------------------------------------------*/
 const Footer = (props) => {
   return(
     <footer id="footer">
-        <div className="about">
-          <div className="container">
-              <div className="row">
-                <Information {...props.data.Footer} />
-                <Maps {...props.data.Footer} />
-              </div>
-          </div>
+      <div className="about">
+        <div className="container">
+            <div className="row">
+              <Information {...props} />
+              <Maps {...props} />
+            </div>
+        </div>
       </div>
-        <div className="footer-bottom">
-          <div className="container">
-              <div className="row">
-                  <div className="col-sm-6">
-                       &copy; 2016 Company Name. Designed by <a target="_blank" href="http://thuylevan.github.io/">Thuy Le Van</a>
-                  </div>
-                  <div className="col-sm-6">
-                    <Social />
-                  </div>
-              </div>
-          </div>
+      <div className="footer-bottom">
+        <div className="container">
+            <div className="row">
+                <div className="col-sm-6">
+                     &copy; 2016 Company Name. Designed by <a target="_blank" href="http://thuylevan.github.io/">Thuy Le Van</a>
+                </div>
+                <div className="col-sm-6">
+                  <Social />
+                </div>
+            </div>
+        </div>
       </div>
     </footer>
   )
@@ -257,7 +272,9 @@ const Social = () => {
      </ul>
   )
 }
-// end footer
+/*-------------------------------------------End Footer------------------------------------------------------*/
+
+
 ReactDOM.render(
 	<App />,
 	document.getElementById('app')
