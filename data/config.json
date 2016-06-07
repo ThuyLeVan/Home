@@ -1,0 +1,84 @@
+{
+  "Header": {
+    "Logo": {
+      "src_logo": "public/images/logo.png",
+      "alt_logo": "logo"
+    },
+    "Menu": {
+      "0": {
+        "num": 1,
+        "text": "My Portal",
+        "link": "#"
+      },
+      "1": {
+        "num": 2,
+        "text": "Help desk",
+        "link": "#"
+      },
+      "2": {
+        "num": 3,
+        "link": "#",
+        "text": "Projects"
+      },
+      "3": {
+        "num": 4,
+        "link": "#",
+        "text": "About"
+      }
+    }
+  },
+  "Slider": {
+    "0": {
+      "num": 1,
+      "image": "public/images/slider/slider1.png",
+      "text": "This is Photoshop's version  of Lorem Ipsum.<br/> Proin gravida nibh vel velit auctor. Aenean sollicitudin, lorem quis bibendum auctor."
+    },
+    "1": {
+      "num": 2,
+      "image": "public/images/slider/slider2.png",
+      "text": "This is Photoshop's version  of Lorem Ipsum.<br/> Proin gravida nibh vel velit auctor. Aenean sollicitudin, lorem quis bibendum auctor."
+    },
+    "2": {
+      "num": 3,
+      "image": "public/images/slider/slider3.png",
+      "text": "This is Photoshop's version  of Lorem Ipsum.<br/> Proin gravida nibh vel velit auctor. Aenean sollicitudin, lorem quis bibendum auctor."
+    }
+  },
+  "Project": {
+    "0": {
+      "num": 1,
+      "name": "Project Name 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": "public/images/project/1.png"
+    },
+    "1": {
+      "num": "2",
+      "name": "Project Name 2",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": "public/images/project/2.png"
+    },
+    "2": {
+      "num": "3",
+      "name": "Project Name 3",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": "public/images/project/3.png"
+    },
+    "3": {
+      "num": "4",
+      "name": "Project Name 4",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "image": "public/images/project/4.png"
+    }
+  },
+  "Footer": {
+    "info": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "adress": "Company adress",
+    "phone": "+8499.999.999",
+    "email": "company@domain.com",
+    "website": "www.company.com",
+    "url_map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31355.53405847114!2d106.67045060584852!3d10.777438406157062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xf871307301b46cd8!2sUniversity+of+Information+Technology!5e0!3m2!1svi!2s!4v1463463136847",
+    "year": "2016",
+    "companyname": "Company Name",
+    "designname": "Thuy Le Van"
+  }
+}
